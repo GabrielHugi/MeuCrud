@@ -12,6 +12,7 @@
     "@expo/ngrok": "^4.1.0",
     "@react-navigation/bottom-tabs": "^7.15.7",
     "@react-navigation/native": "^7.2.0",
+    "cloudflared": "^0.7.1",
     "expo": "^54.0.33",
     "expo-status-bar": "~3.0.9",
     "ionicons": "^8.0.13",

@@ -23,7 +23,7 @@ export default function App() {
             if (route.name === 'Home') {
               iconName = focused ? 'home' : 'home-outline';
             } else if (route.name === 'Brainrots') {
-              iconName = focused ? 'paw' : 'paw-outline';
+              iconName = focused ? 'paw' : 'text-document';
             }
       
             return <Ionicons name={iconName} size={size} color={color} />;

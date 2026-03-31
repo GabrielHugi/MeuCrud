@@ -1,3 +1,5 @@
 npx json-server --watch database.json --port 3500
 
-lt --port 3500 (local tunnel)
+npx expo start --tunnel
+
+ngrok 3500

@@ -4,13 +4,15 @@
       "id": "1",
       "firstName": "Rafael",
       "lastName": "Cruz",
-      "email": "rafael@email.com.br"
+      "email": "rafael@email.com.br",
+      "phone": "199192"
     },
     {
       "firstName": "fernandinha",
       "lastName": "linda maravilhosa",
       "email": "deusa@ceu.com",
-      "id": "fiM4Mnbcn2U"
+      "id": "fiM4Mnbcn2U",
+      "phone": "eeeeeee"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

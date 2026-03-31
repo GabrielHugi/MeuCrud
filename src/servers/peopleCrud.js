@@ -1,7 +1,24 @@
 import { API_URL } from "./configApi";
 
-export async function getPeopleCrud() {
-    const response = await fetch(`${API_URL}/people`);
+export async function getPeopleCrud(name = '') {
+    let url = `${API_URL}/people`;
+    
+    if (name) {
+        const where = {
+            or: [
+                { firstName: { contains: name } },
+                { lastName: { contains: name } }
+            ]
+        };
+          
+        const queryString = new URLSearchParams({
+            _where: JSON.stringify(where)
+        }).toString();
+          
+        url += `?${queryString}`;
+    }
+
+    const response = await fetch(url);
     const data = await response.json();
     return data;
 }

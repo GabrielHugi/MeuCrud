@@ -9,18 +9,25 @@ export default function PeopleScreen() {
   const [people, setPeople] = useState([]);
 
   const [isPersonAddFormVisible, setIsPersonAddFormVisible] = useState(false);
+  const [searchTerms, setSearchTerms] = useState('');
   const [isPersonEditFormVisible, setIsPersonEditFormVisible] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    email: ''
+    email: '',
+    phone: ''
   });
   const [formId, setFormId] = useState(null);
 
   useEffect(() => {
     async function loadPeople() {
       try {
-        const data = await getPeopleCrud();
+        let data;
+        if (searchTerms.trim() !== '') {
+          data = await getPeopleCrud(searchTerms);
+        } else {
+          data = await getPeopleCrud();
+        }
         setPeople(data);
       } catch (error) {
         console.error(error);
@@ -28,7 +35,7 @@ export default function PeopleScreen() {
     }
   
     loadPeople();
-  }, []);
+  }, [searchTerms]);
 
   useEffect(() => {
     if (people.length > 0 && !people[people.length-1].isAdd) setPeople([...people, {isAdd: true}]);
@@ -48,7 +55,8 @@ export default function PeopleScreen() {
         setFormData({
             firstName: '',
             lastName: '',
-            email: ''
+            email: '',
+            phone: ''
           });
         setIsPersonAddFormVisible(false);
     
@@ -67,7 +75,8 @@ export default function PeopleScreen() {
     setFormData({
         firstName: person.firstName,
         lastName: person.lastName,
-        email: person.email
+        email: person.email,
+        phone: person.phone
       });
   
     setIsPersonEditFormVisible(true);
@@ -87,7 +96,8 @@ export default function PeopleScreen() {
         setFormData({
             firstName: '',
             lastName: '',
-            email: ''
+            email: '',
+            phone: ''
           });
         setFormId(null);
         setIsPersonEditFormVisible(false);
@@ -107,7 +117,8 @@ export default function PeopleScreen() {
         setFormData({
             firstName: '',
             lastName: '',
-            email: ''
+            email: '',
+            phone: ''
           });
         setFormId(null);
         setIsPersonEditFormVisible(false);
@@ -122,6 +133,16 @@ export default function PeopleScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title} >People</Text>
+
+      <View>
+        <Text style={styles.modalTitle}>Search</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Rafael"
+          value={searchTerms}
+          onChangeText={setSearchTerms}
+        />
+      </View>
 
       <FlatList
         data={people}
@@ -147,6 +168,7 @@ export default function PeopleScreen() {
               <Text style={styles.personName}>{item.firstName}</Text>
               <Text>Full name: {item.firstName} {item.lastName}</Text>
               <Text>Email: {item.email}</Text>
+              <Text>Phone: {item.phone}</Text>
             </TouchableOpacity>
           );
         }}
@@ -157,7 +179,7 @@ export default function PeopleScreen() {
         visible={isPersonAddFormVisible}
         animationType="slide"
         transparent={true}
-        onRequestClose={() => setIsPersonAddFormVisible(false)} // deixa invisivel quando manda
+        onRequestClose={() => setIsPersonAddFormVisible(false)}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
@@ -181,21 +203,27 @@ export default function PeopleScreen() {
               value={formData.email}
               onChangeText={(text) => setFormData({ ...formData, email: text })}
             />
+            <TextInput
+              style={styles.input}
+              placeholder="Phone"
+              value={formData.phone}
+              onChangeText={(text) => setFormData({ ...formData, phone: text })}
+              keyboardType="phone-pad"
+            />
 
             <View style={styles.buttonContainer}>
-              <TouchableOpacity onPress={() => {setIsPersonAddFormVisible(false); setFormData({firstName: '', lastName: '', email: ''});}} ><Text>Cancel</Text></TouchableOpacity>
+              <TouchableOpacity onPress={() => {setIsPersonAddFormVisible(false); setFormData({firstName: '', lastName: '', email: '', phone: ''});}} ><Text>Cancel</Text></TouchableOpacity>
               <TouchableOpacity onPress={savePerson} ><Text>Save</Text></TouchableOpacity>
             </View>
           </View>
         </View>
       </Modal>
 
-      {/* formulario popup de editar e deletar */}
       <Modal
         visible={isPersonEditFormVisible}
         animationType="slide"
         transparent={true}
-        onRequestClose={() => setIsPersonEditFormVisible(false)} // deixa invisivel quando manda
+        onRequestClose={() => setIsPersonEditFormVisible(false)}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
@@ -219,9 +247,16 @@ export default function PeopleScreen() {
               value={formData.email}
               onChangeText={(text) => setFormData({ ...formData, email: text })}
             />
+            <TextInput
+              style={styles.input}
+              placeholder="Phone"
+              value={formData.phone}
+              onChangeText={(text) => setFormData({ ...formData, phone: text })}
+              keyboardType="phone-pad"
+            />
 
             <View style={styles.buttonContainer}>
-              <TouchableOpacity onPress={() => {setIsPersonEditFormVisible(false); setFormData({firstName: '', lastName: '', email: ''});}} ><Text>Cancel</Text></TouchableOpacity>
+              <TouchableOpacity onPress={() => {setIsPersonEditFormVisible(false); setFormData({firstName: '', lastName: '', email: '', phone: ''});}} ><Text>Cancel</Text></TouchableOpacity>
               <TouchableOpacity onPress={() => editPerson()} ><Text>Save</Text></TouchableOpacity>
               <TouchableOpacity onPress={() => deletePerson()} ><Text>Delete</Text></TouchableOpacity>
             </View>
