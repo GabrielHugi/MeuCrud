@@ -21,11 +21,6 @@ export default function HomeScreen({navigation}) {
         <View style={styles.container}>
 
             <Text style={styles.title}>Pessoa</Text>
-
-            <Button
-                title="Adicionar Pessoa"
-                onPress={() => navigation.navigate}
-            />
         </View>
 
     );

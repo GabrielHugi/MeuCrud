@@ -1,18 +1,25 @@
 {
   "people": [
     {
-      "id": "1",
-      "firstName": "Rafael",
-      "lastName": "Cruz",
-      "email": "rafael@email.com.br",
-      "phone": "199192"
+      "firstName": "Rafaelo",
+      "lastName": "Cruzo",
+      "email": "rafaelo@email.com.br",
+      "phone": "199192",
+      "id": "1"
     },
     {
-      "firstName": "fernandinha",
-      "lastName": "linda maravilhosa",
-      "email": "deusa@ceu.com",
-      "id": "fiM4Mnbcn2U",
-      "phone": "eeeeeee"
+      "firstName": "didjf",
+      "lastName": "ap",
+      "email": "le",
+      "phone": "eeeeeee",
+      "id": "fiM4Mnbcn2U"
+    },
+    {
+      "firstName": "mr bob",
+      "lastName": "esponja",
+      "email": "ee",
+      "phone": "22585995",
+      "id": "OabTyK4SMCo"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
